@@ -7,6 +7,7 @@ import java.util.Map;
 
 import de.matrixweb.smaller.common.SmallerException;
 import de.matrixweb.smaller.javascript.JavaScriptExecutor;
+import de.matrixweb.smaller.javascript.JavaScriptExecutorRhino;
 import de.matrixweb.smaller.resource.Processor;
 import de.matrixweb.smaller.resource.Resource;
 import de.matrixweb.smaller.resource.ResourceResolver;
@@ -33,7 +34,7 @@ public class LessjsProcessor implements Processor {
    * @param version
    */
   public LessjsProcessor(final String version) {
-    this.executor = new JavaScriptExecutor("less-" + version, getClass());
+    this.executor = new JavaScriptExecutorRhino("less-" + version, getClass());
     // this.executor.addProperty("resolver", this.proxy);
     this.executor.addGlobalFunction("resolve", new ResolveFunctor(this.proxy));
     this.executor.addScriptFile(getClass().getResource("/lessjs/less-env.js"));
